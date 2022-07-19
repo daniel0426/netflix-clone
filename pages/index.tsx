@@ -2,7 +2,7 @@ import Head from 'next/head';
 import Banner from '../components/Banner';
 import Header from '../components/Header';
 import { Movie } from '../types';
-import apiRequests from '../utils/ApiRequests';
+import apiRequests from '../utils/apiRequests';
 
 interface Props {
   netflixOriginals: Movie[];
@@ -32,7 +32,7 @@ const Home = ({
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <main>
+      <main className="relative pl-4 pb-24 md:pl-12 lg:space-y-12 lg:pl-20">
         <Banner netflixOriginals={netflixOriginals} />
         <section></section>
       </main>
