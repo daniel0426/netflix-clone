@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react';
+
 import {
   PlusIcon,
   ThumbUpIcon,
@@ -6,12 +8,12 @@ import {
   XIcon,
 } from '@heroicons/react/outline';
 import MuiModal from '@mui/material/Modal';
-import { useEffect, useState } from 'react';
 import { FaPlay } from 'react-icons/fa';
+
 import ReactPlayer from 'react-player/lazy';
 import { useRecoilState } from 'recoil';
 import { modalState, movieState } from '../atoms/modalAtom';
-import { singleMovieUrl } from '../constants/movie';
+import { singleMovieUrl, trailerUrl } from '../constants/movie';
 import { Element, Genre } from '../types';
 
 function Modal() {
@@ -69,7 +71,7 @@ function Modal() {
 
         <div className="relative pt-[56.25%]">
           <ReactPlayer
-            url={`https://www.youtube.com/watch?v=${trailer}`}
+            url={`${trailerUrl}=${trailer}`}
             width="100%"
             height="100%"
             style={{ position: 'absolute', top: '0', left: '0' }}
