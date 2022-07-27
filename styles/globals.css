@@ -32,6 +32,19 @@
   }
 
   .planContainer {
-    @apply relative mx-1.5 flex h-20 bg-[#e50915] w-[calc(100%/3)] items-center justify-center rounded-sm font-semibold shadow after:absolute after:top-full after:left-1/2 after:block after:border-8 after:border-b-0 after:border-transparent after:border-t-[#e50914] after:content-[''] md:h-32 lg:mx-8
+    @apply relative mx-1.5 flex h-20 bg-[#e50915] w-[calc(100%/3)] items-center justify-center rounded-sm font-semibold shadow after:absolute after:top-full after:left-1/2 after:block after:border-8 after:border-b-0 after:border-transparent after:border-t-[#e50914] after:content-[''] md:h-32 lg:mx-8 cursor-pointer
+  }
+
+  
+  .tableRow {
+    @apply flex flex-wrap items-center font-medium
+  }
+
+  .tableDataTitle {
+    @apply w-full p-2.5 text-center text-sm font-normal text-white md:w-2/5 md:p-3.5 md:text-base
+  }
+  
+  .tableData {
+    @apply w-[calc(100%/3)] p-2.5 text-center md:w-[calc(60%/3)] md:p-3.5
   }
 }
