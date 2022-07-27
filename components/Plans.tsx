@@ -85,7 +85,7 @@ function Plans({ products }: Props) {
           <Table products={products} selectedPlan={selectedPlan} />
           <button
             disabled={!selectedPlan || isBillingLoading}
-            className={`mx-auto w-11/2 rounded bg-[#e50914]/90 py-3.5 text-xl shadow hover:bg-[#f6121d] md:w-[420px] ${
+            className={`mx-auto w-11/2 rounded bg-[#e50914]/90 mt-2 py-3.5 text-xl shadow hover:bg-[#f6121d] md:w-[420px] ${
               isBillingLoading && 'opacity-60'
             }`}
             onClick={subscribeToPlan}

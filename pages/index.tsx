@@ -14,6 +14,7 @@ import Header from '../components/Header';
 import Modal from '../components/Modal';
 import Plans from '../components/Plans';
 import Row from '../components/Row';
+import useSubscribe from '../hooks/useSubscribe';
 
 interface Props {
   netflixOriginals: Movie[];
@@ -38,9 +39,9 @@ const Home = ({
   documentaries,
   products,
 }: Props) => {
-  const { logout, loading } = useAuth();
+  const { loading, user } = useAuth();
   const showModal = useRecoilValue(modalState);
-  const subscription = false;
+  const subscription = useSubscribe(user);
   if (loading || subscription === null) return null;
 
   if (!subscription) return <Plans products={products} />;
