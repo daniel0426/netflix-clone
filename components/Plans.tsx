@@ -4,6 +4,8 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useState } from 'react';
 import useAuth from '../hooks/useAuth';
+import { loadCheckout } from '../lib/stripe';
+import Loader from './Loader';
 import Table from './Table';
 
 interface Props {
@@ -11,8 +13,16 @@ interface Props {
 }
 
 function Plans({ products }: Props) {
-  const { logout } = useAuth();
+  const { logout, user } = useAuth();
   const [selectedPlan, setSelectedPlan] = useState<Product | null>(products[2]);
+  const [isBillingLoading, setIsBillingLoading] = useState(false);
+
+  const subscribeToPlan = () => {
+    if (!user) return;
+
+    loadCheckout(selectedPlan?.prices[0].id!);
+    setIsBillingLoading(true);
+  };
 
   return (
     <div>
@@ -38,7 +48,7 @@ function Plans({ products }: Props) {
           Sign Out
         </button>
       </header>
-      <main className="pt-28 max-w-5xl px-5 pb-12 transition-all md:px-10">
+      <main className="pt-28 mx-auto max-w-5xl px-5 pb-12 transition-all md:px-10 ">
         <h1 className="mb-3 text-3xl font-medium ">
           Choose the plan that's right for you
         </h1>
@@ -73,7 +83,15 @@ function Plans({ products }: Props) {
           </div>
 
           <Table products={products} selectedPlan={selectedPlan} />
-          <button>Subscribe</button>
+          <button
+            disabled={!selectedPlan || isBillingLoading}
+            className={`mx-auto w-11/2 rounded bg-[#e50914]/90 py-3.5 text-xl shadow hover:bg-[#f6121d] md:w-[420px] ${
+              isBillingLoading && 'opacity-60'
+            }`}
+            onClick={subscribeToPlan}
+          >
+            {isBillingLoading ? <Loader color="fill-gray-200" /> : 'Subscribe'}
+          </button>
         </div>
       </main>
     </div>
