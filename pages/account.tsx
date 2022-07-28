@@ -2,6 +2,7 @@ import { getProducts, Product } from '@stripe/firestore-stripe-payments';
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
+import Membership from '../components/Membership';
 
 import useAuth from '../hooks/useAuth';
 import useSubscribe from '../hooks/useSubscribe';
@@ -51,10 +52,10 @@ function Account({ products }: Props) {
             </p>
           </div>
         </div>
-        {/* <Membership /> */}
-        <div className="mt-6 grid grid-cols-1 gap-x-4 border px-4 py-4 md:grid-cols-4 md:border-x-0 md:border-t md:border-b-0 md:px0 md:pb-0">
-          <h4>Plan Details</h4>
-          <div>
+        <Membership />
+        <div className="mt-6 grid grid-cols-1 gap-x-4 border px-4 py-4 md:grid-cols-4 md:border-x-0 md:border-t md:border-b-0 md:px-0 md:pb-0">
+          <h4 className="text-lg text-[gray]">Plan Details</h4>
+          <div className="col-span-2 font-medium">
             {
               products.filter(
                 (product) => product.id === subscription?.product
@@ -66,7 +67,7 @@ function Account({ products }: Props) {
           </p>
         </div>
 
-        <div className="mt-6 grid grid-cols-1 gap-x-4 border px-4 py-4 md:grid-cols-4 md:border-x-0 md:border-t md:border-b-0 md:px0 md:pb-0">
+        <div className="mt-6 grid grid-cols-1 gap-x-4 border px-4 py-4 md:grid-cols-4 md:border-x-0 md:border-t md:border-b-0 md:px-0 md:pb-0">
           <h4 className="text-lg text-[gray]">Settings</h4>
           <p
             className="col-span-3 cursor-pointer text-blue-500 hover:underline"
