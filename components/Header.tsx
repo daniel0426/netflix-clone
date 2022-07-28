@@ -2,6 +2,7 @@ import { BellIcon, SearchIcon } from '@heroicons/react/solid';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import useAuth from '../hooks/useAuth';
+import BasicMenu from './BasicMenu';
 
 function Header() {
   const [isScrolled, setIsScrolled] = useState<boolean>(false);
@@ -14,7 +15,7 @@ function Header() {
       } else {
         setIsScrolled(false);
       }
-    }; 
+    };
     window.addEventListener('scroll', handleScroll);
     return () => {
       window.removeEventListener('scroll', handleScroll);
@@ -31,6 +32,7 @@ function Header() {
           className="cursor-pointer object-contain"
         />
         {/* <p className="md:hidden px-2 py-[0.5px] border-2 rounded">Browse</p> */}
+        <BasicMenu />
         <ul className="hidden space-x-4 md:flex">
           <li className="headerLink">Home</li>
           <li className="headerLink">TV Shows</li>
