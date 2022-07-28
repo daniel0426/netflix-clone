@@ -1,11 +1,12 @@
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/outline';
+import { DocumentData } from 'firebase/firestore';
 import { useState, useRef } from 'react';
 import { Movie } from '../types';
 import Thumbnail from './Thumbnail';
 
 interface RowProps {
   title: string;
-  movies: Movie[];
+  movies: Movie[] | DocumentData[];
 }
 
 function Row({ title, movies }: RowProps) {
@@ -25,10 +26,10 @@ function Row({ title, movies }: RowProps) {
   };
   return (
     <div className="h-40 space-y-1 md:space-y-2">
-      <h2 className="bg-clip-text text-transparent bg-gradient-to-r to-white/90 from-red-600/90 w-56 cursor-pointer text-sm font-semibold  transition duration-200 md:text-2xl">
+      <h2 className="bg-clip-text text-transparent bg-gradient-to-r to-white/90 from-red-600/90 w-56 cursor-pointer text-md font-semibold  transition duration-200 md:text-2xl">
         {title}
       </h2>
-      <div className="group relative md:-ml-2 w-screen">
+      <div className="group relative md:-ml-2">
         <ChevronLeftIcon
           className={`absolute top-0 bottom-0 left-2 z-40 m-auto h-8 w-8 cursor-pointer opacity-0 trasition hover:scale-125 group-hover:opacity-100 
           ${!isMoved && 'hidden'}`}
@@ -43,7 +44,7 @@ function Row({ title, movies }: RowProps) {
           ))}
         </div>
         <ChevronRightIcon
-          className={`absolute top-0 bottom-0 right-2 z-40 m-auto h-8 w-8 cursor-pointer opacity-0 trasition hover:scale-125 group-hover:opacity-100`}
+          className={`absolute top-0 bottom-0 right-4 z-40 m-auto h-8 w-8 cursor-pointer opacity-0 trasition hover:scale-120 group-hover:opacity-100`}
           onClick={() => handleClick('right')}
         />
       </div>

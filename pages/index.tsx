@@ -1,20 +1,21 @@
 import Head from 'next/head';
 
 import { useRecoilValue } from 'recoil';
-import { modalState } from '../atoms/modalAtom';
+import { modalState, movieState } from '../atoms/modalAtom';
 
-import useAuth from '../hooks/useAuth';
-import { Movie } from '../types';
 import apiRequests from '../utils/apiRequests';
 import { getProducts, Product } from '@stripe/firestore-stripe-payments';
 import payments from '../lib/stripe';
+import useAuth from '../hooks/useAuth';
+import useSubscribe from '../hooks/useSubscribe';
+import useList from '../hooks/useList';
+import { Movie } from '../types';
 
 import Banner from '../components/Banner';
 import Header from '../components/Header';
 import Modal from '../components/Modal';
 import Plans from '../components/Plans';
 import Row from '../components/Row';
-import useSubscribe from '../hooks/useSubscribe';
 
 interface Props {
   netflixOriginals: Movie[];
@@ -42,12 +43,15 @@ const Home = ({
   const { loading, user } = useAuth();
   const showModal = useRecoilValue(modalState);
   const subscription = useSubscribe(user);
+  const movie = useRecoilValue(movieState);
+  const list = useList(user?.uid);
+
   if (loading || subscription === null) return null;
 
   if (!subscription) return <Plans products={products} />;
   return (
     <div
-      className={`relative h-screen bg-gradient-to-bottom from-gray-600/20 to-[#010511] lg:h-[140vh] ${
+      className={`relative h-screen bg-gradient-to-b from-gray-600/20 to-[#010511] lg:h-[140vh] ${
         showModal && '!h-screen overflow-hidden'
       }`}
     >
@@ -56,13 +60,14 @@ const Home = ({
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <main className="relative px-4 pb-24  lg:space-y-24 md:px-16 lg:px-24">
+      <main className="relative pl-4 pb-24 lg:space-y-24 lg:pl-16 ">
         <Banner netflixOriginals={netflixOriginals} />
         <section className="md:space-y-24">
           <Row title="Trending Now" movies={trendingNow} />
           <Row title="Top Rated" movies={topRated} />
           <Row title="Action Thrillers" movies={actionMovies} />
           {/* Mylist Component */}
+          {list.length > 0 && <Row title="My List" movies={list} />}
           <Row title="Comedies" movies={comedyMovies} />
           <Row title="Scary Movies" movies={horrorMovies} />
           <Row title="Romance Movies" movies={romanceMovies} />

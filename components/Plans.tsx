@@ -1,12 +1,14 @@
-import { CheckIcon } from '@heroicons/react/outline';
-import { Product } from '@stripe/firestore-stripe-payments';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useState } from 'react';
-import useAuth from '../hooks/useAuth';
-import { loadCheckout } from '../lib/stripe';
+
+import { CheckIcon } from '@heroicons/react/outline';
+import { Product } from '@stripe/firestore-stripe-payments';
 import Loader from './Loader';
 import Table from './Table';
+
+import useAuth from '../hooks/useAuth';
+import { loadCheckout } from '../lib/stripe';
 
 interface Props {
   products: Product[];
